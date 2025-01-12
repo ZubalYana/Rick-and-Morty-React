@@ -1,0 +1,27 @@
+.Character{
+    width: 330px;
+    height: 420px;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    color: #f6f6f6;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.Character img{
+    width: 100%;
+    margin-bottom: 12px;
+    border-radius: 10px;
+}
+.characterName{
+    font-size: 24px;
+    font-weight: 700;
+}
+.characterSpecies{
+    margin-top: 5px;
+    font-weight: 400;
+}
+.Character:hover{
+    background-color: #4e4e4e;
+}
