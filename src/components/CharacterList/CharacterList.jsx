@@ -10,17 +10,24 @@ export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [characterInfo, setCharacterInfo] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  useEffect(() => {
+  const fetchCharacters = (page) => {
     axios
-      .get('https://rickandmortyapi.com/api/character')
+      .get(`https://rickandmortyapi.com/api/character?page=${page}`)
       .then((response) => {
         setCharacters(response.data.results);
+        setTotalPages(response.data.info.pages);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchCharacters(currentPage);
+  }, [currentPage]);
 
   const getCharacterInfo = (id) => {
     axios
@@ -34,8 +41,18 @@ export default function CharacterList() {
       });
   };
 
+  const handlePreviousPage = () => {
+    if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prevPage) => prevPage + 1);
+  };
+
   return (
-    <div className='characterList'>
+    <div className="characterList">
+
+
       {characters.map((character) => (
         <Character
           key={character.id}
@@ -75,8 +92,19 @@ export default function CharacterList() {
         <p>Species: {characterInfo.species}</p>
         <p>Gender: {characterInfo.gender}</p>
         <p>Origin: {characterInfo.origin?.name}</p>
-        {/* <button onClick={() => setIsOpen(false)}>Close</button> */}
       </Modal>
+
+      <div className="pagination">
+        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span style={{color: '#f6f6f6'}}>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
+      </div>
     </div>
   );
 }
