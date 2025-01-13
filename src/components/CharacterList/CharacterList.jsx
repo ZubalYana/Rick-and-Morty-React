@@ -51,8 +51,22 @@ export default function CharacterList() {
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
         style={{
-          overlay: { backgroundColor: 'rgba(0, 0, 0, 0.75)' },
-          content: { color: 'lightsteelblue', padding: '20px', borderRadius: '10px' },
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          },
+          content: {
+            position: 'static',
+            inset: 'unset',
+            width: '600px',
+            height: '400px',
+            borderRadius: '10px',
+            padding: '20px',
+            backgroundColor: '#fff',
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          },
         }}
       >
         <h2>{characterInfo.name}</h2>
@@ -61,7 +75,7 @@ export default function CharacterList() {
         <p>Species: {characterInfo.species}</p>
         <p>Gender: {characterInfo.gender}</p>
         <p>Origin: {characterInfo.origin?.name}</p>
-        <button onClick={() => setIsOpen(false)}>Close</button>
+        {/* <button onClick={() => setIsOpen(false)}>Close</button> */}
       </Modal>
     </div>
   );
