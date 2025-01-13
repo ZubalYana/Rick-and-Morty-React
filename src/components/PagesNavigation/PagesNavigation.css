@@ -1,0 +1,12 @@
+.navigationBar{
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    background-color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 0;
+    bottom: 0;
+    padding: 0px 40px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import './PagesNavigation.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import home from '/home.svg';
 import character from '/character.svg';
 import episode from '/episode.svg';
@@ -20,9 +20,15 @@ export default function PagesNavigation() {
   return (
     <div className="navigationBar">
       {navigationItems.map((item, index) => (
-        <Link to={item.path} key={index} className="navigationLink">
-          <PagesNavigationElement img={item.img} text={item.text} />
-        </Link>
+        <NavLink
+          to={item.path}
+          key={index}
+          className={({ isActive }) => (isActive ? 'activeLink' : '')}
+        >
+          {({ isActive }) => (
+            <PagesNavigationElement img={item.img} text={item.text} isActive={isActive} />
+          )}
+        </NavLink>
       ))}
     </div>
   );
