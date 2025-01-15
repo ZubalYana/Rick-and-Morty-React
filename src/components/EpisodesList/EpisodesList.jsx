@@ -1,25 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import './EpisodesList.css';
 import axios from 'axios';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 export default function EpisodesList() {
   const [episodes, setEpisodes] = useState([]);
+  const [pageInfo, setPageInfo] = useState({ next: null, prev: null, pages: 0 });
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  function fetchEpisodes() {
+  const currentPage = parseInt(searchParams.get('page')) || 1;
+
+  useEffect(() => {
+    fetchEpisodes(currentPage);
+  }, [currentPage]);
+
+  function fetchEpisodes(page) {
     axios
-      .get('https://rickandmortyapi.com/api/episode')
+      .get(`https://rickandmortyapi.com/api/episode?page=${page}`)
       .then((response) => {
-        console.log('API response:', response.data.results);
+        console.log('API response:', response.data);
         setEpisodes(response.data.results);
+        setPageInfo({
+          next: response.data.info.next,
+          prev: response.data.info.prev,
+          pages: response.data.info.pages,
+        });
       })
       .catch((error) => {
         console.error('Error fetching episodes:', error);
       });
   }
 
-  useEffect(() => {
-    fetchEpisodes();
-  }, []);
+  const handlePageChange = (page) => {
+    navigate(`/episodes?page=${page}`);
+  };
 
   return (
     <div className='EpisodesList'>
@@ -36,7 +51,7 @@ export default function EpisodesList() {
         <tbody>
           {episodes.map((episode, index) => (
             <tr key={episode.id}>
-              <td>{index + 1}</td>
+              <td>{index + 1 + (currentPage - 1) * 20}</td>
               <td>{episode.name}</td>
               <td>{episode.episode}</td>
               <td>{episode.air_date}</td>
@@ -44,6 +59,21 @@ export default function EpisodesList() {
           ))}
         </tbody>
       </table>
+      <div className="pagination">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={!pageInfo.prev}
+        >
+          Previous
+        </button>
+        <span>Page {currentPage} of {pageInfo.pages}</span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={!pageInfo.next}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 }
