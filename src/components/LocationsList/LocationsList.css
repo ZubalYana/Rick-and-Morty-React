@@ -1,0 +1,28 @@
+.locationsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    color: #f6f6f6;
+  }
+  .locationsTable th,
+  .locationsTable td {
+    border: 1px solid #444;
+    padding: 8px;
+  }
+  .locationsTable th {
+    background-color: #222; 
+    color: #fff; 
+    text-transform: uppercase;
+  }
+  .locationsTable tr:nth-child(even) {
+    background-color: #333;
+  }
+  .locationsTable tr:nth-child(odd) {
+    background-color: #111;
+  }
+  .locationsTable tr:hover {
+    background-color: #555;
+  }
+  
