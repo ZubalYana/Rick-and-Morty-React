@@ -3,6 +3,7 @@ import './CharacterList.css';
 import axios from 'axios';
 import Character from '../Character/Character';
 import Modal from 'react-modal';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
@@ -10,24 +11,31 @@ export default function CharacterList() {
   const [characters, setCharacters] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [characterInfo, setCharacterInfo] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [pageInfo, setPageInfo] = useState({ next: null, prev: null, pages: 0 });
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const currentPage = parseInt(searchParams.get('page')) || 1;
+
+  useEffect(() => {
+    fetchCharacters(currentPage);
+  }, [currentPage]);
 
   const fetchCharacters = (page) => {
     axios
       .get(`https://rickandmortyapi.com/api/character?page=${page}`)
       .then((response) => {
         setCharacters(response.data.results);
-        setTotalPages(response.data.info.pages);
+        setPageInfo({
+          next: response.data.info.next,
+          prev: response.data.info.prev,
+          pages: response.data.info.pages,
+        });
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  useEffect(() => {
-    fetchCharacters(currentPage);
-  }, [currentPage]);
 
   const getCharacterInfo = (id) => {
     axios
@@ -41,18 +49,12 @@ export default function CharacterList() {
       });
   };
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) setCurrentPage((prevPage) => prevPage - 1);
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage((prevPage) => prevPage + 1);
+  const handlePageChange = (page) => {
+    navigate(`/characters?page=${page}`);
   };
 
   return (
     <div className="characterList">
-
-
       {characters.map((character) => (
         <Character
           key={character.id}
@@ -95,13 +97,13 @@ export default function CharacterList() {
       </Modal>
 
       <div className="pagination">
-        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={!pageInfo.prev}>
           Previous
         </button>
-        <span style={{color: '#f6f6f6'}}>
-          {currentPage}/{totalPages}
+        <span style={{ color: '#f6f6f6' }}>
+          Page {currentPage} of {pageInfo.pages}
         </span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+        <button onClick={() => handlePageChange(currentPage + 1)} disabled={!pageInfo.next}>
           Next
         </button>
       </div>
