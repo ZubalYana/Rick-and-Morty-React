@@ -1,3 +1,32 @@
 .EpisodesList{
     color: #f6f6f6;
+    margin-bottom: 80px;
 }
+.episodesTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    color: #f6f6f6;
+  }
+  .episodesTable th,
+  .episodesTable td {
+    border: 1px solid #444;
+    padding: 8px;
+  }
+  .episodesTable th {
+    background-color: #222;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .episodesTable tr:nth-child(even) {
+    background-color: #333;
+  }
+  .episodesTable tr:nth-child(odd) {
+    background-color: #111;
+  }
+  .episodesTable tr:hover {
+    background-color: #555;
+  }
+  

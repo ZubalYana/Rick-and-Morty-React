@@ -6,7 +6,8 @@ export default function EpisodesList() {
   const [episodes, setEpisodes] = useState([]);
 
   function fetchEpisodes() {
-    axios.get('https://rickandmortyapi.com/api/episode')
+    axios
+      .get('https://rickandmortyapi.com/api/episode')
       .then((response) => {
         console.log('API response:', response.data.results);
         setEpisodes(response.data.results);
@@ -23,13 +24,26 @@ export default function EpisodesList() {
   return (
     <div className='EpisodesList'>
       <h1>Episodes List</h1>
-      <ul>
-        {episodes.map((episode) => (
-          <li key={episode.id}>
-            {episode.name} - {episode.episode}
-          </li>
-        ))}
-      </ul>
+      <table className="episodesTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Episode Code</th>
+            <th>Air Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {episodes.map((episode, index) => (
+            <tr key={episode.id}>
+              <td>{index + 1}</td>
+              <td>{episode.name}</td>
+              <td>{episode.episode}</td>
+              <td>{episode.air_date}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
