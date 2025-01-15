@@ -99,7 +99,7 @@ export default function CharacterList() {
           Previous
         </button>
         <span style={{color: '#f6f6f6'}}>
-          Page {currentPage} of {totalPages}
+          {currentPage}/{totalPages}
         </span>
         <button onClick={handleNextPage} disabled={currentPage === totalPages}>
           Next
