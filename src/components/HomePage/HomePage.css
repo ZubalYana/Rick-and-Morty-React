@@ -1,0 +1,30 @@
+.Homepage{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+.backgroundPoster_con{
+    width: 105%;
+    height: 100%;
+    position: relative;
+}
+.backgroundPoster{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    z-index: -2;
+    overflow: hidden;
+}
+.backgroundPoster_overlay{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.697);
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    z-index: -1;
+}

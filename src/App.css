@@ -6,10 +6,10 @@
 }
 body{
     background-color: #000000;
-    padding: 40px;
 }
 .screen{
     padding-bottom: 80px;
+    padding: 40px;
 }
 .screenTitle{
     color: #f6f6f6;
