@@ -12,7 +12,7 @@ export default function HomePage() {
           <h1 className="homePage_title">Rick and Morty funpage №1</h1>
           <p className="homePage_text">
           <p>Explore a comprehensive list of episodes, from iconic adventures to hidden gems, and discover the bizarre and unpredictable locations featured throughout the series. Whether it's the Citadel of Ricks, Anatomy Park, or the mysterious Planet Squanch, there's always something new to learn and love!</p>
-          <p>Create your personal watchlist to keep track of the episodes you've seen and the ones still on your journey. Relive your favorite moments, stay updated, and never miss a beat as you traverse the insane, action-packed world of Rick and Morty.</p>
+          <p style={{ marginTop: '5px' }}>Create your personal watchlist to keep track of the episodes you've seen and the ones still on your journey. Relive your favorite moments, stay updated, and never miss a beat as you traverse the insane, action-packed world of Rick and Morty.</p>
           </p>
           <div className="homepageBtns">
           <button className="exploreButton homepageButton">
