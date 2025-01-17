@@ -5,7 +5,7 @@ export default function PagesNavigationElement({ img, text, isActive }) {
   return (
     <div className={`PagesNavigationElement ${isActive ? 'active' : ''}`}>
       <img src={img} alt="navigationIcon" />
-      <p>{text}</p>
+      <p style={{ textDecoration: "none" }}>{text}</p>
     </div>
   );
 }
