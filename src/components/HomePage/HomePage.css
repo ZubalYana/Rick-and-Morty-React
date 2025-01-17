@@ -5,16 +5,15 @@
 .rickAndMortyLogo{
     width: 500px;
 }
-.textContainer{
-    color: #f6f6f6;
-}
 .homePage_title{
-    font-size: 32px;
+    font-size: 38px;
     font-weight: 600;
 }
 .homePage_text{
-    font-size: 16px;
+    width: 600px;
+    font-size: 14px;
     font-weight: 300;
+    margin-top: 10px;
 }
 .Homepage_content{
     width: 100%;
@@ -27,6 +26,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color: #f6f6f6;
+    padding-left: 20px;
 }
 .homepage_imgCon{
     width: 50%;
@@ -34,4 +35,53 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.homepageButton {
+    width: 230px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #A5D7EF;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+.homepageButton:hover {
+    background-color: #68a6c3;
+    transform: scale(1.1);
+    box-shadow: 0px 8px 15px rgba(255, 255, 255, 0.2);
+}
+.homepageButton::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.2);
+    transition: width 0.4s ease;
+    z-index: 1;
+}
+.homepageButton:hover::before {
+    width: 100%;
+}
+.homepageButton p {
+    margin-left: 10px;
+    z-index: 2; 
+}
+.homepageButton svg {
+    z-index: 2; 
+}
+.homepageBtns{
+    width: 490px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
 }
