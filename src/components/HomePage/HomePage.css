@@ -1,30 +1,37 @@
 .Homepage{
     width: 100%;
     height: 100vh;
-    position: relative;
-    overflow: hidden;
 }
-.backgroundPoster_con{
-    width: 105%;
-    height: 100%;
-    position: relative;
+.rickAndMortyLogo{
+    width: 500px;
 }
-.backgroundPoster{
+.textContainer{
+    color: #f6f6f6;
+}
+.homePage_title{
+    font-size: 32px;
+    font-weight: 600;
+}
+.homePage_text{
+    font-size: 16px;
+    font-weight: 300;
+}
+.Homepage_content{
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    position: absolute;
-    top: -40px;
-    left: -40px;
-    z-index: -2;
-    overflow: hidden;
+    display: flex;
 }
-.backgroundPoster_overlay{
-    width: 100%;
+.textContainer{
+    width: 50%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.697);
-    position: absolute;
-    top: -40px;
-    left: -40px;
-    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.homepage_imgCon{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
