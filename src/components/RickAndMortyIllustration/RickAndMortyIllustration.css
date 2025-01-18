@@ -1,0 +1,28 @@
+.RickAndMortyIllustration{
+    width: 500px;
+    height: 500px;
+    position: relative;
+    z-index: 9999;
+}
+.illustration_part{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.5s ease-in-out;
+}
+.RickAndMortyIllustration:hover #rickImg {
+    transform: rotate(-20deg) scale(1.3);
+    transition: all 0.5s ease-in-out;
+}
+.RickAndMortyIllustration:hover #mortyImg {
+    transform: rotate(30deg) scale(1.1);
+    top: -50px;
+    left: 27px;
+    transition: all 0.5s ease-in-out;
+}
+.RickAndMortyIllustration:hover #textImg {
+    transform: rotate(-15deg) scale(1.1);
+    top: 80px;
+    left: -70px;
+    transition: all 0.5s ease-in-out;
+}

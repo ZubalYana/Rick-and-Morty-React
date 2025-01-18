@@ -1,6 +1,7 @@
 import React from 'react';
 import './HomePage.css';
 import rickAndMortyLogo from '/rick and morty img.jpg';
+import RickAndMortyIllustration from '../RickAndMortyIllustration/RickAndMortyIllustration';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
@@ -25,7 +26,8 @@ export default function HomePage() {
 
         </div>
         <div className="homepage_imgCon">
-          <img src={rickAndMortyLogo} alt="Rick and Morty Logo" className="rickAndMortyLogo" />
+          {/* <img src={rickAndMortyLogo} alt="Rick and Morty Logo" className="rickAndMortyLogo" /> */}
+          <RickAndMortyIllustration />
         </div>
       </div>
     </div>
