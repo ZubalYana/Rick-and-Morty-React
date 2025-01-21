@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './WatchList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import EpisodeList from '../EpisodeList/EpisodeList';
 
 export default function WatchList() {
   const [episodeName, setEpisodeName] = useState('');
@@ -75,23 +76,6 @@ export default function WatchList() {
     setShowHints(false);
   };
 
-  const EpisodeList = ({ episodes, toggleSeenStatus }) => (
-    episodes.map((episode) => (
-      <div key={episode.id} className="episodeItem">
-        <div className="episodeItem_text">
-          <h3>{episode.name}</h3>
-          <p>Air Date: {episode.air_date}</p>
-          <p>Episode: {episode.episode}</p>
-        </div>
-        <div className="episodeItem_icons">
-          <button onClick={() => toggleSeenStatus(episode.id)}>
-            <FontAwesomeIcon icon={episode.seen ? faEyeSlash : faEye} />
-          </button>
-        </div>
-      </div>
-    ))
-  );
-
   return (
     <div className="WatchList">
       <div className="inputContainer">
@@ -147,3 +131,4 @@ export default function WatchList() {
     </div>
   );
 }
+``
