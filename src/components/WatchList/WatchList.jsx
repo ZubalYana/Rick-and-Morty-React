@@ -76,6 +76,13 @@ export default function WatchList() {
     setShowHints(false);
   };
 
+  const deleteEpisode = (id) => {
+    const updatedEpisodes = episodes.filter((episode) => episode.id !== id);
+    setEpisodes(updatedEpisodes);
+    localStorage.setItem('episodes', JSON.stringify(updatedEpisodes));
+  };
+  
+
   return (
     <div className="WatchList">
       <div className="inputContainer">
@@ -113,21 +120,23 @@ export default function WatchList() {
         )}
       </div>
       <div className="episodeListContainer">
-        <div className="unseenContainer episodesContainer">
-          <h2>Unseen Episodes</h2>
-          <EpisodeList
-            episodes={episodes.filter((episode) => !episode.seen)}
-            toggleSeenStatus={toggleSeenStatus}
-          />
-        </div>
-        <div className="seenContainer episodesContainer">
-          <h2>Seen Episodes</h2>
-          <EpisodeList
-            episodes={episodes.filter((episode) => episode.seen)}
-            toggleSeenStatus={toggleSeenStatus}
-          />
-        </div>
-      </div>
+  <div className="unseenContainer episodesContainer">
+    <h2>Unseen Episodes</h2>
+    <EpisodeList
+      episodes={episodes.filter((episode) => !episode.seen)}
+      toggleSeenStatus={toggleSeenStatus}
+      deleteEpisode={deleteEpisode} 
+    />
+  </div>
+  <div className="seenContainer episodesContainer">
+    <h2>Seen Episodes</h2>
+    <EpisodeList
+      episodes={episodes.filter((episode) => episode.seen)}
+      toggleSeenStatus={toggleSeenStatus}
+      deleteEpisode={deleteEpisode} 
+    />
+  </div>
+</div>
     </div>
   );
 }
