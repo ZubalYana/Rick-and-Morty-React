@@ -34,20 +34,32 @@ export default function WatchList() {
   }, []);
 
   const handleSearch = () => {
+    if (!episodeName.trim()) {
+      alert('Please enter an episode name.');
+      return;
+    }
     axios
       .get(`https://rickandmortyapi.com/api/episode/?name=${episodeName.replaceAll(' ', '&')}`)
       .then((res) => {
         const newEpisode = { ...res.data.results[0], seen: false }; 
         if (newEpisode) {
-          const updatedList = [...episodes, newEpisode];
-          setEpisodes(updatedList);
-          localStorage.setItem('episodes', JSON.stringify(updatedList));
+          if (episodes.some((episode) => episode.id === newEpisode.id)) {
+            alert('This episode is already in your watch list');
+          } else {
+            const updatedList = [...episodes, newEpisode];
+            setEpisodes(updatedList);
+            localStorage.setItem('episodes', JSON.stringify(updatedList));
+          }
         }
       })
       .catch((err) => {
         console.error('Error fetching episode:', err);
+      })
+      .finally(() => {
+        setEpisodeName('');
       });
   };
+  
 
   const toggleSeenStatus = (index) => {
     const updatedEpisodes = episodes.map((episode, i) =>
