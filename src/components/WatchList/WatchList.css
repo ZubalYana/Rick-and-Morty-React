@@ -13,7 +13,7 @@
     color: #000;
     max-height: 200px;
     overflow-y: auto;
-    width: 80%;
+    width: 500px;
     z-index: 100;
     border-radius: 4px;
 } 
@@ -24,4 +24,59 @@
 .hint:hover{
     background-color: #f0f0f0;
 }
-  
+.searchInput{
+    width: 500px;
+    height: 50px;
+    border: #f6f6f6;
+    border-radius: 6px;
+    outline: none;
+    padding-left: 15px;
+}
+.addButton{
+    width: 230px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #A5D7EF;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+.addButton:hover{
+    background-color: #68a6c3;
+    transform: scale(1.1);
+    box-shadow: 0px 8px 15px rgba(255, 255, 255, 0.2);
+}
+.addButton::before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.2);
+    transition: width 0.4s ease;
+    z-index: 1;
+}
+.addButton:hover::before{
+    width: 100%;
+}
+.addButton p{
+    margin-left: 10px;
+    z-index: 2; 
+}
+.addButton svg{
+    z-index: 2; 
+}
+.inputContainer{
+    width: 750px;
+    display: flex;
+    justify-content: space-between;
+}

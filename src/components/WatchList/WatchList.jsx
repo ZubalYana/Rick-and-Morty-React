@@ -8,20 +8,17 @@ export default function WatchList() {
   const [allEpisodes, setAllEpisodes] = useState([]);
   const [showHints, setShowHints] = useState(false);
 
-  // Load episodes from local storage when the component mounts
   useEffect(() => {
     const storedEpisodes = JSON.parse(localStorage.getItem('episodes')) || [];
     setEpisodes(storedEpisodes);
   }, []);
 
-  // Fetch all episodes initially
   useEffect(() => {
     axios
       .get('https://rickandmortyapi.com/api/episode')
       .then(async (res) => {
         let episodesList = [...res.data.results];
 
-        // Fetch additional pages if available
         let nextPage = res.data.info.next;
         while (nextPage) {
           const nextPageData = await axios.get(nextPage);
@@ -40,7 +37,7 @@ export default function WatchList() {
     axios
       .get(`https://rickandmortyapi.com/api/episode/?name=${episodeName.replaceAll(' ', '&')}`)
       .then((res) => {
-        const newEpisode = { ...res.data.results[0], seen: false }; // Add a "seen" status
+        const newEpisode = { ...res.data.results[0], seen: false }; 
         if (newEpisode) {
           const updatedList = [...episodes, newEpisode];
           setEpisodes(updatedList);
@@ -68,17 +65,18 @@ export default function WatchList() {
   return (
     <div className="WatchList">
       <h1>My Watch List</h1>
-      <p>Manage your Rick & Morty episodes to watch later.</p>
+      <p>Keep track of your favorite Rick & Morty episodes and create a personalized watchlist to enjoy them at your convenience.</p>
       <div className="inputContainer">
         <input
+          className="searchInput"
           type="text"
           onChange={(e) => setEpisodeName(e.target.value)}
           value={episodeName}
           placeholder="Search for an episode"
           onFocus={() => setShowHints(true)}
-          onBlur={() => setTimeout(() => setShowHints(false), 200)} // Hide hints after clicking
+          onBlur={() => setTimeout(() => setShowHints(false), 200)}
         />
-        <button onClick={handleSearch}>Add to Watch List</button>
+        <button onClick={handleSearch} className='addButton'>Add to Watch List</button>
         {showHints && (
           <div className="hintsContainer">
             {allEpisodes
