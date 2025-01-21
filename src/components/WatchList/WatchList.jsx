@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './WatchList.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 export default function WatchList() {
   const [episodeName, setEpisodeName] = useState('');
@@ -76,8 +79,6 @@ export default function WatchList() {
 
   return (
     <div className="WatchList">
-      <h1>My Watch List</h1>
-      <p>Keep track of your favorite Rick & Morty episodes and create a personalized watchlist to enjoy them at your convenience.</p>
       <div className="inputContainer">
         <input
           className="searchInput"
@@ -108,25 +109,36 @@ export default function WatchList() {
         )}
       </div>
       <div className="episodeListContainer">
+        <div className="unseenContainer episodesContainer">
         <h2>Unseen Episodes</h2>
         {episodes.filter((episode) => !episode.seen).map((episode, index) => (
           <div key={index} className="episodeItem">
+            <div className="episodeItem_text">
             <h3>{episode.name}</h3>
             <p>Air Date: {episode.air_date}</p>
             <p>Episode: {episode.episode}</p>
-            <button onClick={() => toggleSeenStatus(index)}>Mark as Seen</button>
+            </div>
+            <div className="episodeItem_icons">
+            <button onClick={() => toggleSeenStatus(index)}><FontAwesomeIcon icon={episode.seen ? faEyeSlash : faEye} /></button>
+            </div>
           </div>
         ))}
-
+        </div>
+        <div className="seenContainer episodesContainer">
         <h2>Seen Episodes</h2>
         {episodes.filter((episode) => episode.seen).map((episode, index) => (
           <div key={index} className="episodeItem">
+            <div className="episodeItem_text">
             <h3>{episode.name}</h3>
             <p>Air Date: {episode.air_date}</p>
             <p>Episode: {episode.episode}</p>
-            <button onClick={() => toggleSeenStatus(index)}>Mark as Unseen</button>
+            </div>
+            <div className="episodeItem_icons">
+            <button onClick={() => toggleSeenStatus(index)}><FontAwesomeIcon icon={episode.seen ? faEyeSlash : faEye} /></button>
+            </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );
