@@ -1,13 +1,13 @@
 .Character{
     width: 330px;
     height: 420px;
-    background-color: #3c3c3c;
+    background-color: #2f2f2f;
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 30px;
     color: #f6f6f6;
     cursor: pointer;
-    transition: 0.5s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 .Character img{
     width: 100%;
@@ -23,5 +23,6 @@
     font-weight: 400;
 }
 .Character:hover{
-    background-color: #5c5c5c;
+    background-color: #272727;
+    transform: scale(1.05);
 }
