@@ -26,3 +26,18 @@
         display: none;
     }
 }
+@media screen and (max-width: 376px) {
+    .navigationBar{
+        width: 100% !important;
+        padding: 0 30px;
+    }
+    .PagesNavigationElement{
+        width: auto;
+    }
+    .PagesNavigationElement img{
+        height: 20px !important;
+    }
+    .PagesNavigationElement p{
+        display: none;
+    }
+}

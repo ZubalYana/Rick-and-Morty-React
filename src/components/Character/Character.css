@@ -26,3 +26,8 @@
     background-color: #272727;
     transform: scale(1.05);
 }
+@media screen and (max-width: 320px) {
+    .Character{
+        height: 380px;
+    }
+}
