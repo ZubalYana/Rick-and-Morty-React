@@ -4,7 +4,8 @@ import axios from 'axios';
 import Character from '../Character/Character';
 import Modal from 'react-modal';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 Modal.setAppElement('#root');
 
 export default function CharacterList() {
@@ -65,7 +66,6 @@ export default function CharacterList() {
           onClick={() => getCharacterInfo(character.id)}
         />
       ))}
-
       <Modal
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
@@ -80,7 +80,7 @@ export default function CharacterList() {
             position: 'static',
             inset: 'unset',
             width: '600px',
-            height: '400px',
+            height: '320px',
             borderRadius: '10px',
             padding: '20px',
             backgroundColor: '#fff',
@@ -88,23 +88,27 @@ export default function CharacterList() {
           },
         }}
       >
-        <h2>{characterInfo.name}</h2>
-        <img src={characterInfo.image} alt={characterInfo.name} style={{ width: '200px' }} />
-        <p>Status: {characterInfo.status}</p>
-        <p>Species: {characterInfo.species}</p>
-        <p>Gender: {characterInfo.gender}</p>
-        <p>Origin: {characterInfo.origin?.name}</p>
+        <h2 className='modalTitle'>{characterInfo.name}</h2>
+        <div className="modal_content">
+        <img className='modalImage' src={characterInfo.image} alt={characterInfo.name} />
+        <div className="modalText">
+        <p>Status: <span style={{ color: characterInfo.status === 'Alive' ? 'green' : 'red', fontWeight: 600 }}>{characterInfo.status}</span></p>
+        <p>Species: <span style={{ fontWeight: 600 }}>{characterInfo.species}</span></p>
+        <p>Gender: <span style={{ fontWeight: 600 }}>{characterInfo.gender}</span></p>
+        <p>Origin: <span style={{ fontWeight: 600 }}>{characterInfo.origin?.name}</span></p>
+        </div>
+        </div>
       </Modal>
 
       <div className="pagination">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={!pageInfo.prev}>
-          Previous
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         <span style={{ color: '#f6f6f6' }}>
-          Page {currentPage} of {pageInfo.pages}
+          {currentPage}/{pageInfo.pages}
         </span>
         <button onClick={() => handlePageChange(currentPage + 1)} disabled={!pageInfo.next}>
-          Next
+          <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
     </div>

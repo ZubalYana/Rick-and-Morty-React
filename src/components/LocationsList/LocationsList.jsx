@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './LocationsList.css';
 import axios from 'axios';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 export default function LocationsList() {
   const [locations, setLocations] = useState([]);
   const [pageInfo, setPageInfo] = useState({ next: null, prev: null, pages: 0 });
@@ -64,14 +65,14 @@ export default function LocationsList() {
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={!pageInfo.prev}
         >
-          Previous
+          <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-        <span>Page {currentPage} of {pageInfo.pages}</span>
+        <span>{currentPage}/{pageInfo.pages}</span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={!pageInfo.next}
         >
-          Next
+          <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
     </div>

@@ -7,3 +7,46 @@
 .pagination{
     margin-bottom: 80px;
 }
+.modalTitle{
+    font-size: 28px;
+    font-weight: 700;
+}
+.modalImage{
+    width: 220px;
+    margin-top: 15px;
+    border-radius: 7px;
+}
+.modal_content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.modalText{
+    width: 60%;
+    padding: 15px;
+}
+.modalText p{
+    margin-bottom: 10px;
+}
+.pagination{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+.pagination button{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background-color: #A5D7EF;
+    margin: 0 15px;
+}
+.pagination button:hover{
+    background-color: #68a6c3;
+}
