@@ -4,23 +4,34 @@ import axios from 'axios';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 export default function LocationsList() {
   const [locations, setLocations] = useState([]);
   const [pageInfo, setPageInfo] = useState({ next: null, prev: null, pages: 0 });
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
   const currentPage = parseInt(searchParams.get('page')) || 1;
+  const [filters, setFilters] = useState({
+    name: '',
+    type: '',
+    dimension: '',
+  });
 
   useEffect(() => {
     fetchLocations(currentPage);
-  }, [currentPage]);
+  }, [currentPage, filters]);
 
   function fetchLocations(page) {
+    const params = new URLSearchParams({
+      page,
+      name: filters.name,
+      type: filters.type,
+      dimension: filters.dimension,
+    });
+
     axios
-      .get(`https://rickandmortyapi.com/api/location?page=${page}`)
+      .get(`https://rickandmortyapi.com/api/location?${params.toString()}`)
       .then((response) => {
-        console.log('API response:', response.data);
         setLocations(response.data.results);
         setPageInfo({
           next: response.data.info.next,
@@ -39,7 +50,28 @@ export default function LocationsList() {
 
   return (
     <div>
-      <h2 className='screenTitle'>Locations List</h2>
+      <h2 className="screenTitle">Locations List</h2>
+      <div className="filters">
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={filters.name}
+          onChange={(e) => setFilters({ ...filters, name: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Search by type"
+          value={filters.type}
+          onChange={(e) => setFilters({ ...filters, type: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Search by dimension"
+          value={filters.dimension}
+          onChange={(e) => setFilters({ ...filters, dimension: e.target.value })}
+        />
+      </div>
+
       <table className="locationsTable">
         <thead>
           <tr>
@@ -67,7 +99,9 @@ export default function LocationsList() {
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-        <span>{currentPage}/{pageInfo.pages}</span>
+        <span>
+          {currentPage}/{pageInfo.pages}
+        </span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={!pageInfo.next}
