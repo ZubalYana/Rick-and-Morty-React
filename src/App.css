@@ -40,14 +40,15 @@ body{
     .screen{
         padding: 15px;
     }
-    /* .filters{
-        width: 100%;
-         flex-wrap: wrap;
-    } */
 }
 @media screen and (max-width: 376px) {
     .screen{
         padding: 25px;
+    }
+}
+@media screen and (max-width: 426px) {
+    .screen{
+        padding: 30px;
     }
     .filters{
         width: 100%;
