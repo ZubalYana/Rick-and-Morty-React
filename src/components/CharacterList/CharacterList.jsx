@@ -15,16 +15,28 @@ export default function CharacterList() {
   const [pageInfo, setPageInfo] = useState({ next: null, prev: null, pages: 0 });
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
   const currentPage = parseInt(searchParams.get('page')) || 1;
-
+  const [filters, setFilters] = useState({
+    species: '',
+    status: '',
+    gender: '',
+  });
+  
   useEffect(() => {
     fetchCharacters(currentPage);
-  }, [currentPage]);
+  }, [currentPage, filters]);
+  
 
   const fetchCharacters = (page) => {
+    const params = new URLSearchParams({
+      page,
+      species: filters.species,
+      status: filters.status,
+      gender: filters.gender,
+    });
+  
     axios
-      .get(`https://rickandmortyapi.com/api/character?page=${page}`)
+      .get(`https://rickandmortyapi.com/api/character?${params.toString()}`)
       .then((response) => {
         setCharacters(response.data.results);
         setPageInfo({
@@ -37,6 +49,7 @@ export default function CharacterList() {
         console.log(error);
       });
   };
+  
 
   const getCharacterInfo = (id) => {
     axios
@@ -56,6 +69,36 @@ export default function CharacterList() {
 
   return (
     <div className="characterList">
+      <div className="filters">
+        <select
+          value={filters.species}
+          onChange={(e) => setFilters({ ...filters, species: e.target.value })}
+        >
+          <option value="">All Species</option>
+          <option value="Human">Human</option>
+          <option value="Alien">Alien</option>
+        </select>
+        <select
+          value={filters.status}
+          onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+        >
+          <option value="">All Status</option>
+          <option value="Alive">Alive</option>
+          <option value="Dead">Dead</option>
+          <option value="unknown">Unknown</option>
+        </select>
+        <select
+          value={filters.gender}
+          onChange={(e) => setFilters({ ...filters, gender: e.target.value })}
+        >
+          <option value="">All Genders</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Genderless">Genderless</option>
+          <option value="unknown">Unknown</option>
+        </select>
+      </div>
+
       {characters.map((character) => (
         <Character
           key={character.id}
