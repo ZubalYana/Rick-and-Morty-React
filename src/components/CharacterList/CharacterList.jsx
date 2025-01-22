@@ -99,6 +99,7 @@ export default function CharacterList() {
         </select>
       </div>
 
+      <div className="charactersCon">
       {characters.map((character) => (
         <Character
           key={character.id}
@@ -142,6 +143,7 @@ export default function CharacterList() {
         </div>
         </div>
       </Modal>
+      </div>
 
       <div className="pagination">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={!pageInfo.prev}>

@@ -1,5 +1,8 @@
 .characterList{
     width: 100%;
+}
+.charactersCon{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -50,3 +53,20 @@
 .pagination button:hover{
     background-color: #68a6c3;
 }
+.filters{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.filters select{
+    padding: 7px;
+    font-size: 16px;
+    background-color: #f6f6f6;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+  
