@@ -39,7 +39,7 @@ export default function LocationsList() {
 
   return (
     <div>
-      <h1>Locations List</h1>
+      <h2 className='screenTitle'>Locations List</h2>
       <table className="locationsTable">
         <thead>
           <tr>

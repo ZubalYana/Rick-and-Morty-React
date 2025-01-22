@@ -4,24 +4,38 @@ import axios from 'axios';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 export default function EpisodesList() {
   const [episodes, setEpisodes] = useState([]);
   const [pageInfo, setPageInfo] = useState({ next: null, prev: null, pages: 0 });
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
   const currentPage = parseInt(searchParams.get('page')) || 1;
+  const [filters, setFilters] = useState({
+    name: '',
+    sortOrder: 'asc', // 'asc' for oldest to newest, 'desc' for newest to oldest
+  });
 
   useEffect(() => {
     fetchEpisodes(currentPage);
-  }, [currentPage]);
+  }, [currentPage, filters]);
 
   function fetchEpisodes(page) {
+    const params = new URLSearchParams({
+      page,
+      name: filters.name,
+    });
+
     axios
-      .get(`https://rickandmortyapi.com/api/episode?page=${page}`)
+      .get(`https://rickandmortyapi.com/api/episode?${params.toString()}`)
       .then((response) => {
-        console.log('API response:', response.data);
-        setEpisodes(response.data.results);
+        const sortedResults = [...response.data.results].sort((a, b) => {
+          const dateA = new Date(a.air_date);
+          const dateB = new Date(b.air_date);
+          return filters.sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+        });
+
+        setEpisodes(sortedResults);
         setPageInfo({
           next: response.data.info.next,
           prev: response.data.info.prev,
@@ -38,8 +52,24 @@ export default function EpisodesList() {
   };
 
   return (
-    <div className='EpisodesList'>
-      <h1>Episodes List</h1>
+    <div className="EpisodesList">
+      <h2 className='screenTitle'>Episodes List:</h2>
+      <div className="filters">
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={filters.name}
+          onChange={(e) => setFilters({ ...filters, name: e.target.value })}
+        />
+        <select
+          value={filters.sortOrder}
+          onChange={(e) => setFilters({ ...filters, sortOrder: e.target.value })}
+        >
+          <option value="asc">Sort by Air Date (Oldest to Newest)</option>
+          <option value="desc">Sort by Air Date (Newest to Oldest)</option>
+        </select>
+      </div>
+
       <table className="episodesTable">
         <thead>
           <tr>
@@ -67,7 +97,9 @@ export default function EpisodesList() {
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-        <span>{currentPage}/{pageInfo.pages}</span>
+        <span>
+          {currentPage}/{pageInfo.pages}
+        </span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={!pageInfo.next}
