@@ -11,3 +11,18 @@
     padding: 0px 40px;
     z-index: 9999;
 }
+@media screen and (max-width: 320px) {
+    .navigationBar{
+        width: 100% !important;
+        padding: 0 20px;
+    }
+    .PagesNavigationElement{
+        width: auto;
+    }
+    .PagesNavigationElement img{
+        height: 20px !important;
+    }
+    .PagesNavigationElement p{
+        display: none;
+    }
+}
