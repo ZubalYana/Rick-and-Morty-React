@@ -1,10 +1,13 @@
 import React from 'react';
 import './HomePage.css';
+import { useNavigate } from 'react-router-dom';
 import RickAndMortyIllustration from '../RickAndMortyIllustration/RickAndMortyIllustration';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+
 export default function HomePage() {
+  const navigate = useNavigate();
   return (
     <div className="Homepage screen">
       <div className="Homepage_content">
@@ -15,12 +18,20 @@ export default function HomePage() {
           <p style={{ marginTop: '8px' }}>Create your personal watchlist to keep track of the episodes you've seen and the ones still on your journey. Relive your favorite moments, stay updated, and never miss a beat as you traverse the insane, action-packed world of Rick and Morty.</p>
           </p>
           <div className="homepageBtns">
-          <button className="exploreButton homepageButton">
-            <FontAwesomeIcon icon={faMagnifyingGlass} /><p>Explore</p>
-          </button>
-          <button className="watchListButton homepageButton">
-            <FontAwesomeIcon icon={faBookmark} /><p>My Watch List</p>
-          </button>
+            <button
+              className="exploreButton homepageButton"
+              onClick={() => navigate('/characters')}
+            >
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <p>Explore</p>
+            </button>
+            <button
+              className="watchListButton homepageButton"
+              onClick={() => navigate('/watchList')}
+            >
+              <FontAwesomeIcon icon={faBookmark} />
+              <p>My Watch List</p>
+            </button>
           </div>
 
         </div>
