@@ -118,7 +118,7 @@ export default function WatchList() {
               ))}
           </div>
         )}
-      </div>
+        </div>
       <div className="episodeListContainer">
   <div className="unseenContainer episodesContainer">
     <h2>Unseen Episodes</h2>
