@@ -25,4 +25,16 @@
   .locationsTable tr:hover {
     background-color: #68a6c3b5;
   }
+  .locationsTableWrapper {
+    overflow-x: auto;
+    margin: 10px 0;
+  }
+  .locationsTableWrapper::-webkit-scrollbar {
+    height: 3px; 
+  }
+  @media screen and (max-width: 320px) {
+      .locationsTable{
+          font-size: 12px;
+      }
+  }
   

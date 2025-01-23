@@ -71,7 +71,8 @@ export default function LocationsList() {
           onChange={(e) => setFilters({ ...filters, dimension: e.target.value })}
         />
       </div>
-
+      
+      <div className="locationsTableWrapper">
       <table className="locationsTable">
         <thead>
           <tr>
@@ -92,6 +93,8 @@ export default function LocationsList() {
           ))}
         </tbody>
       </table>
+      </div>
+
       <div className="pagination">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
