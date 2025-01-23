@@ -8,7 +8,7 @@ export default function RickAndMortyIllustration() {
     <div className='RickAndMortyIllustration'>
         <img src={rick} alt="rick" className='illustration_part' id='rickImg' />
         <img src={morty} alt="morty" className='illustration_part' id='mortyImg' />
-        <img src={rickAndMortyText} alt="rick and morty text" className='illustration_part' id='textImg' />
+        <img src={rickAndMortyText} alt="rick and morty text" className='illustration_part' style={{ position: 'relative'}} id='textImg' />
     </div>
   )
 }
