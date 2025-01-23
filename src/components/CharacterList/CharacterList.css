@@ -69,4 +69,82 @@
     border: none;
     outline: none;
 }
-  
+.ReactModal__Content{
+    position: static !important;
+    inset: unset !important;
+    width: 600px;
+    height: 320px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 320px) {
+    .ReactModal__Overlay{
+        padding-bottom: 50px;
+    }
+    .ReactModal__Content {
+      width: 80%;
+      height: auto; 
+      padding: 10px;
+    }
+    .modal_content{
+        flex-direction: column;
+    }
+    .modalTitle{
+        font-size: 20px;
+    }
+    .modalImage{
+        width: 100% !important;
+    }
+    .modalText{
+        padding: 10px 0 0 0;
+        width: 100%;
+    }
+}
+@media (max-width: 376px) {
+    .ReactModal__Overlay{
+        padding-bottom: 50px;
+    }
+    .ReactModal__Content {
+      width: 80%;
+      height: auto; 
+      padding: 10px;
+    }
+    .modal_content{
+        flex-direction: column;
+    }
+    .modalTitle{
+        font-size: 20px;
+    }
+    .modalImage{
+        width: 80%;
+    }
+    .modalText{
+        padding: 10px 0 0 0;
+        width: 100%;
+    }
+}
+@media (max-width: 426px) {
+    .ReactModal__Overlay{
+        padding-bottom: 50px;
+    }
+    .ReactModal__Content {
+      width: 80%;
+      height: auto; 
+      padding: 10px;
+    }
+    .modal_content{
+        flex-direction: column;
+    }
+    .modalTitle{
+        font-size: 20px;
+    }
+    .modalImage{
+        width: 80%;
+    }
+    .modalText{
+        padding: 10px 0 0 0;
+        width: 100%;
+    }
+}

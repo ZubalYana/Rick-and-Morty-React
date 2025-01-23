@@ -120,16 +120,6 @@ export default function CharacterList() {
             alignItems: 'center',
             justifyContent: 'center',
           },
-          content: {
-            position: 'static',
-            inset: 'unset',
-            width: '600px',
-            height: '320px',
-            borderRadius: '10px',
-            padding: '20px',
-            backgroundColor: '#fff',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-          },
         }}
       >
         <h2 className='modalTitle'>{characterInfo.name}</h2>
