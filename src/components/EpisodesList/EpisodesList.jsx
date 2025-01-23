@@ -13,7 +13,7 @@ export default function EpisodesList() {
   const currentPage = parseInt(searchParams.get('page')) || 1;
   const [filters, setFilters] = useState({
     name: '',
-    sortOrder: 'asc', // 'asc' for oldest to newest, 'desc' for newest to oldest
+    sortOrder: 'asc', 
   });
 
   useEffect(() => {
@@ -64,12 +64,13 @@ export default function EpisodesList() {
         <select
           value={filters.sortOrder}
           onChange={(e) => setFilters({ ...filters, sortOrder: e.target.value })}
+          className='episodesDateSelect'
         >
           <option value="asc">Sort by Air Date (Oldest to Newest)</option>
           <option value="desc">Sort by Air Date (Newest to Oldest)</option>
         </select>
       </div>
-
+      <div className="episodesTableWrapper">
       <table className="episodesTable">
         <thead>
           <tr>
@@ -90,6 +91,7 @@ export default function EpisodesList() {
           ))}
         </tbody>
       </table>
+      </div>
       <div className="pagination">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
