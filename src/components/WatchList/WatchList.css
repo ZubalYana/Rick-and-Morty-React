@@ -108,6 +108,12 @@
     font-size: 24px;
     font-weight: 600;
 }
+.seenContainer .episodeItem{
+    background-color: #bdbdbd;
+}
+.seenContainer .episodeItem_icons button{
+    background-color: #bdbdbd;
+}
 @media screen and (max-width: 320px) {
     .inputContainer{
         width: 100%;
