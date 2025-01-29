@@ -21,11 +21,47 @@ export default function CharacterList() {
     status: '',
     gender: '',
   });
-  
+
+  const [speciesOptions, setSpeciesOptions] = useState([]);
+  const [statusOptions, setStatusOptions] = useState([]);
+  const [genderOptions, setGenderOptions] = useState([]);
+
   useEffect(() => {
+    fetchFilters();
     fetchCharacters(currentPage);
   }, [currentPage, filters]);
-  
+
+  // Fetch all pages to get complete filter options
+  const fetchFilters = async () => {
+    try {
+      let allSpecies = new Set();
+      let allStatus = new Set();
+      let allGenders = new Set();
+      let page = 1;
+      let nextPage = true;
+
+      while (nextPage) {
+        const response = await axios.get(`https://rickandmortyapi.com/api/character?page=${page}`);
+        response.data.results.forEach((char) => {
+          allSpecies.add(char.species);
+          allStatus.add(char.status);
+          allGenders.add(char.gender);
+        });
+
+        if (response.data.info.next) {
+          page++;
+        } else {
+          nextPage = false;
+        }
+      }
+
+      setSpeciesOptions(Array.from(allSpecies));
+      setStatusOptions(Array.from(allStatus));
+      setGenderOptions(Array.from(allGenders));
+    } catch (error) {
+      console.log("Error fetching filters:", error);
+    }
+  };
 
   const fetchCharacters = (page) => {
     const params = new URLSearchParams({
@@ -34,7 +70,7 @@ export default function CharacterList() {
       status: filters.status,
       gender: filters.gender,
     });
-  
+
     axios
       .get(`https://rickandmortyapi.com/api/character?${params.toString()}`)
       .then((response) => {
@@ -49,7 +85,6 @@ export default function CharacterList() {
         console.log(error);
       });
   };
-  
 
   const getCharacterInfo = (id) => {
     axios
@@ -75,64 +110,72 @@ export default function CharacterList() {
           onChange={(e) => setFilters({ ...filters, species: e.target.value })}
         >
           <option value="">All Species</option>
-          <option value="Human">Human</option>
-          <option value="Alien">Alien</option>
+          {speciesOptions.map((species) => (
+            <option key={species} value={species}>
+              {species}
+            </option>
+          ))}
         </select>
+
         <select
           value={filters.status}
           onChange={(e) => setFilters({ ...filters, status: e.target.value })}
         >
           <option value="">All Status</option>
-          <option value="Alive">Alive</option>
-          <option value="Dead">Dead</option>
-          <option value="unknown">Unknown</option>
+          {statusOptions.map((status) => (
+            <option key={status} value={status}>
+              {status}
+            </option>
+          ))}
         </select>
+
         <select
           value={filters.gender}
           onChange={(e) => setFilters({ ...filters, gender: e.target.value })}
         >
           <option value="">All Genders</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Genderless">Genderless</option>
-          <option value="unknown">Unknown</option>
+          {genderOptions.map((gender) => (
+            <option key={gender} value={gender}>
+              {gender}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="charactersCon">
-      {characters.map((character) => (
-        <Character
-          key={character.id}
-          id={character.id}
-          name={character.name}
-          species={character.species}
-          image={character.image}
-          onClick={() => getCharacterInfo(character.id)}
-        />
-      ))}
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={() => setIsOpen(false)}
-        style={{
-          overlay: {
-            backgroundColor: 'rgba(0, 0, 0, 0.75)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          },
-        }}
-      >
-        <h2 className='modalTitle'>{characterInfo.name}</h2>
-        <div className="modal_content">
-        <img className='modalImage' src={characterInfo.image} alt={characterInfo.name} />
-        <div className="modalText">
-        <p>Status: <span style={{ color: characterInfo.status === 'Alive' ? 'green' : 'red', fontWeight: 600 }}>{characterInfo.status}</span></p>
-        <p>Species: <span style={{ fontWeight: 600 }}>{characterInfo.species}</span></p>
-        <p>Gender: <span style={{ fontWeight: 600 }}>{characterInfo.gender}</span></p>
-        <p>Origin: <span style={{ fontWeight: 600 }}>{characterInfo.origin?.name}</span></p>
-        </div>
-        </div>
-      </Modal>
+        {characters.map((character) => (
+          <Character
+            key={character.id}
+            id={character.id}
+            name={character.name}
+            species={character.species}
+            image={character.image}
+            onClick={() => getCharacterInfo(character.id)}
+          />
+        ))}
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={() => setIsOpen(false)}
+          style={{
+            overlay: {
+              backgroundColor: 'rgba(0, 0, 0, 0.75)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            },
+          }}
+        >
+          <h2 className='modalTitle'>{characterInfo.name}</h2>
+          <div className="modal_content">
+            <img className='modalImage' src={characterInfo.image} alt={characterInfo.name} />
+            <div className="modalText">
+              <p>Status: <span style={{ color: characterInfo.status === 'Alive' ? 'green' : 'red', fontWeight: 600 }}>{characterInfo.status}</span></p>
+              <p>Species: <span style={{ fontWeight: 600 }}>{characterInfo.species}</span></p>
+              <p>Gender: <span style={{ fontWeight: 600 }}>{characterInfo.gender}</span></p>
+              <p>Origin: <span style={{ fontWeight: 600 }}>{characterInfo.origin?.name}</span></p>
+            </div>
+          </div>
+        </Modal>
       </div>
 
       <div className="pagination">
